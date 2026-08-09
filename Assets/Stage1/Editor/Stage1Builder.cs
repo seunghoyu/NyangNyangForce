@@ -973,7 +973,10 @@ public static class Stage1Builder
         pixelPerfect.assetsPPU = 30;
         pixelPerfect.refResolutionX = 480;
         pixelPerfect.refResolutionY = 270;
-        pixelPerfect.cropFrame = PixelPerfectCamera.CropFrame.None;
+        // Keep the authored 480x270 stage framing at non-integer WebGL viewport sizes.
+        // Without StretchFill, PixelPerfectCamera exposes extra world space around the
+        // 16:9 background whenever the browser viewport is between integer scales.
+        pixelPerfect.cropFrame = PixelPerfectCamera.CropFrame.StretchFill;
         pixelPerfect.gridSnapping = PixelPerfectCamera.GridSnapping.UpscaleRenderTexture;
     }
 

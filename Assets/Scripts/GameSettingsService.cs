@@ -23,6 +23,17 @@ public sealed class GameSettingsData
     public int attack = (int)Key.Z;
 }
 
+public static class DebugCheats
+{
+    public static bool Invincible { get; private set; }
+
+    public static void ToggleInvincibility()
+    {
+        Invincible = !Invincible;
+        Debug.Log("Debug invincibility: " + (Invincible ? "ON" : "OFF"));
+    }
+}
+
 public static class GameSettingsService
 {
     private const string PrefsKey = "cramming_hamster.settings.v1";

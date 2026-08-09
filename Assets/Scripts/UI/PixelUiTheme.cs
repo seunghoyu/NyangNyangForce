@@ -78,7 +78,7 @@ public static class PixelUiTheme
             Fill(rect, new Color(0.02f, 0.04f, 0.09f, 0.72f));
         }
         centerStyle.normal.textColor = active ? selectedColor ?? Accent : Text;
-        GUI.Label(rect, (selected ? "▶ " : string.Empty) + text, centerStyle);
+        GUI.Label(rect, (selected ? "> " : string.Empty) + text, centerStyle);
         return GUI.Button(rect, GUIContent.none, GUIStyle.none);
     }
 

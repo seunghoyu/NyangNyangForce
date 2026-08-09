@@ -405,10 +405,12 @@ public sealed class GameMenuController : MonoBehaviour
     private static string CompactKeyLabel(int keyValue)
     {
         Key key = (Key)keyValue;
-        if (key == Key.LeftArrow) return "←";
-        if (key == Key.RightArrow) return "→";
-        if (key == Key.UpArrow) return "↑";
-        if (key == Key.DownArrow) return "↓";
+        // The shared pixel font does not contain Unicode arrow glyphs.
+        // Keep key labels ASCII-only so WebGL does not render missing-glyph boxes.
+        if (key == Key.LeftArrow) return "LEFT";
+        if (key == Key.RightArrow) return "RIGHT";
+        if (key == Key.UpArrow) return "UP";
+        if (key == Key.DownArrow) return "DOWN";
         if (key == Key.LeftShift) return "L-SHIFT";
         if (key == Key.RightShift) return "R-SHIFT";
         if (key == Key.Space) return "SPACE";

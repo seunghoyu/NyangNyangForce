@@ -249,6 +249,7 @@ public sealed class Stage1Player : MonoBehaviour
             audioFeedback?.StopAllLoops();
             return;
         }
+        if (keyboard != null) HandleDebugInvincibilityShortcut();
         if (game.ControlsLocked)
         {
             audioFeedback?.StopAllLoops();
@@ -624,12 +625,21 @@ public sealed class Stage1Player : MonoBehaviour
 
     public void TakeDamage(int damage)
     {
-        if (game == null || game.BattleEnded || movementInvulnerable || Time.time < invincibleUntil) return;
+        if (game == null || game.BattleEnded || DebugCheats.Invincible || movementInvulnerable || Time.time < invincibleUntil) return;
         int healthBeforeDamage = CurrentHealth;
         CurrentHealth = Mathf.Max(0, CurrentHealth - Mathf.Max(0, damage));
         audioFeedback?.PlayDamage(CurrentHealth <= 0);
         invincibleUntil = Time.time + InvincibilityDuration;
         StartCoroutine(FlashInvincibility(healthBeforeDamage));
+    }
+
+    private static void HandleDebugInvincibilityShortcut()
+    {
+        Keyboard keyboard = Keyboard.current;
+        bool control = keyboard.leftCtrlKey.isPressed || keyboard.rightCtrlKey.isPressed;
+        bool shift = keyboard.leftShiftKey.isPressed || keyboard.rightShiftKey.isPressed;
+        if (control && shift && keyboard.pKey.wasPressedThisFrame)
+            DebugCheats.ToggleInvincibility();
     }
 
     private IEnumerator FlashInvincibility(int healthBeforeDamage)

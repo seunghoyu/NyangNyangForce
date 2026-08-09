@@ -34,13 +34,13 @@ public sealed class TutorialKeyGuide : MonoBehaviour
 
     private static readonly KeyHint[] Hints =
     {
-        new KeyHint("← / →", "이동", PreviewKind.Move),
+        new KeyHint("LEFT / RIGHT", "이동", PreviewKind.Move),
         new KeyHint("SPACE", "2단 점프", PreviewKind.DoubleJump),
         new KeyHint("SHIFT", "대시", PreviewKind.Dash),
-        new KeyHint("↓ + SPACE", "발판 아래로 내려가기", PreviewKind.DropThrough),
-        new KeyHint("↓ + SHIFT", "공중 하강 슬램", PreviewKind.Slam),
+        new KeyHint("DOWN + SPACE", "발판 아래로 내려가기", PreviewKind.DropThrough),
+        new KeyHint("DOWN + SHIFT", "공중 하강 슬램", PreviewKind.Slam),
         new KeyHint("Z / X", "기본 사격", PreviewKind.Shooting),
-        new KeyHint("★", "연사 무기 아이템", PreviewKind.Item),
+        new KeyHint("ITEM", "연사 무기 아이템", PreviewKind.Item),
         new KeyHint("C", "웅크리기", PreviewKind.Crouch)
     };
 
@@ -165,9 +165,9 @@ public sealed class TutorialKeyGuide : MonoBehaviour
             string[] labels =
             {
                 "Z / X  오른쪽 사격",
-                "↓ + Z / X  아래 사격",
-                "↑ + Z / X  위 사격",
-                "→ + Z / X  이동 사격"
+                "DOWN + Z / X  아래 사격",
+                "UP + Z / X  위 사격",
+                "RIGHT + Z / X  이동 사격"
             };
             Rect guideRect = new Rect(rect.x + 12f, rect.y + 28f, rect.width - 24f, 40f);
             PixelUiTheme.DrawInset(guideRect);
@@ -183,7 +183,7 @@ public sealed class TutorialKeyGuide : MonoBehaviour
                 int row = i / 2;
                 GUI.Label(
                     new Rect(guideRect.x + column * cellWidth, guideRect.y + row * cellHeight, cellWidth, cellHeight),
-                    (i == shootingMode ? "▶ " : "  ") + labels[i],
+                    (i == shootingMode ? "> " : "  ") + labels[i],
                     shootingLabelStyle);
             }
         }
