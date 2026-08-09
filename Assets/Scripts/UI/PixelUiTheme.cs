@@ -32,7 +32,13 @@ public static class PixelUiTheme
 
     public static void DrawBackdrop()
     {
-        Fill(new Rect(0f, 0f, 480f, 270f), new Color(0f, 0f, 0f, 0.72f));
+        // Popups use a scaled 480x270 reference canvas, but the Stage 1 camera now
+        // stretches to the full viewport. Draw the dimmer in real screen space so
+        // no uncovered strips remain at non-integer browser aspect ratios.
+        Matrix4x4 previous = GUI.matrix;
+        GUI.matrix = Matrix4x4.identity;
+        Fill(new Rect(0f, 0f, Screen.width, Screen.height), new Color(0f, 0f, 0f, 0.72f));
+        GUI.matrix = previous;
     }
 
     public static void DrawPanel(Rect rect, Color? border = null)

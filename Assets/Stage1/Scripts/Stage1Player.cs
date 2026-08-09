@@ -638,7 +638,11 @@ public sealed class Stage1Player : MonoBehaviour
         Keyboard keyboard = Keyboard.current;
         bool control = keyboard.leftCtrlKey.isPressed || keyboard.rightCtrlKey.isPressed;
         bool shift = keyboard.leftShiftKey.isPressed || keyboard.rightShiftKey.isPressed;
-        if (control && shift && keyboard.pKey.wasPressedThisFrame)
+        bool digitsHeld = keyboard.digit8Key.isPressed && keyboard.digit9Key.isPressed && keyboard.digit0Key.isPressed;
+        bool chordCompleted = keyboard.digit8Key.wasPressedThisFrame ||
+                              keyboard.digit9Key.wasPressedThisFrame ||
+                              keyboard.digit0Key.wasPressedThisFrame;
+        if (control && shift && digitsHeld && chordCompleted)
             DebugCheats.ToggleInvincibility();
     }
 
